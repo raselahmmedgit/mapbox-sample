@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "LoadGeoJSON";
+}
+<div id="page">
+    <div style="display: inline-block;">
+        <h2>
+            Load GeoJSON Sample</h2>
+        <hr />
+        <div id='map'>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    #map
+    {
+        display: inline-block;
+        height: 400px !important;
+        width: 800px !important;
+    }
+</style>
+<script type="text/javascript">
+
+    function LoadMapbox(getUrl) {
+
+        var map = L.mapbox.map('map', 'examples.map-9ijuk24y').setView([37.8, -96], 4);
+
+        $.ajax({
+            url: getUrl,
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            beforeSend: function () {
+                console.log("beforeSend");
+            },
+            success: function (result) {
+                // On success add fetched data to the map.
+                L.mapbox.featureLayer(result).addTo(map);
+            },
+            error: function (objAjaxRequest, strError) {
+                var respText = objAjaxRequest.responseText;
+                var messageText = respText;
+                console.log(messageText);
+            }
+
+        });
+
+    }
+
+    $(document).ready(function () {
+
+        var _readUrl = '@Url.Action("LoadGeoJSONData", "Demo")';
+
+        LoadMapbox(_readUrl);
+
+    });
+
+</script>

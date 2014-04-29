@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "LoadGeoJSON";
+}
+<div id="page">
+    <div style="display: inline-block;">
+        <h2>
+            Load GeoJSON Sample</h2>
+        <hr />
+        <div id='map'>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    #map
+    {
+        display: inline-block;
+        height: 400px !important;
+        width: 800px !important;
+    }
+    .mapbox-box
+    {
+        color: #000000 !important;
+        width: 100% !important;
+    }
+    .mapbox-box-title
+    {
+        font-size: 14px !important;
+        font-weight: bold !important;
+        margin-bottom: 5px !important;
+    }
+    .mapbox-box-description
+    {
+    }
+</style>
+<script type="text/javascript">
+
+    function LoadMapbox(getUrl) {
+
+        var map = L.mapbox.map('map', 'examples.map-9ijuk24y');
+
+        var myLayer = L.mapbox.featureLayer().addTo(map);
+
+        myLayer.on('layeradd', function (e) {
+            var marker = e.layer, feature = marker.feature;
+
+            // Create custom popup content
+            var popupContent = '<a target="_blank" class="popup" href="' + feature.properties.url + '"><div class="mapbox-box">' +
+
+                        '<div  class="mapbox-box-title">' + feature.properties.title + '</div>' +
+
+                        '<div  class="mapbox-box-description">' + feature.properties.description + '</div>' +
+
+                        '</div></a>';
+
+            marker.bindPopup(popupContent, {
+                closeButton: false,
+                minWidth: 250
+            });
+        });
+
+        $.ajax({
+            url: getUrl,
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            beforeSend: function () {
+                console.log("beforeSend");
+            },
+            success: function (result) {
+                // Add features to the map
+                myLayer.setGeoJSON(result);
+            },
+            error: function (objAjaxRequest, strError) {
+                var respText = objAjaxRequest.responseText;
+                var messageText = respText;
+                console.log(messageText);
+            }
+
+        });
+
+        map.setView([37.8, -96], 4);
+
+    }
+
+    $(document).ready(function () {
+
+        var _readUrl = '@Url.Action("LoadGeoJSONData", "Demo")';
+
+        LoadMapbox(_readUrl);
+
+    });
+
+</script>

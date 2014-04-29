@@ -1,0 +1,153 @@
+﻿@{
+    ViewBag.Title = "LoadGeoJSON";
+}
+<div id="page">
+    <div style="display: inline-block;">
+        <h2>
+            Load GeoJSON Sample</h2>
+        <hr />
+        <div id='map'>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    #map
+    {
+        display: inline-block;
+        height: 400px !important;
+        width: 800px !important;
+    }
+</style>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var _readUrl = '@Url.Action("LoadGeoJSONData", "Demo")';
+
+        //        var geojson = [
+        //                                        {
+        //                                            "type": "Feature",
+        //                                            "geometry": {
+        //                                                "type": "Point",
+        //                                                "coordinates": [-77.03238901390978, 38.913188059745586]
+        //                                            },
+        //                                            "properties": {
+        //                                                "title": "Mapbox DC",
+        //                                                "description": "1714 14th St NW, Washington DC",
+        //                                                "marker-color": "#fc4353",
+        //                                                "marker-size": "large",
+        //                                                "marker-symbol": "monument"
+        //                                            }
+        //                                        },
+        //                                        {
+        //                                            "type": "Feature",
+        //                                            "geometry": {
+        //                                                "type": "Point",
+        //                                                "coordinates": [-122.414, 37.776]
+        //                                            },
+        //                                            "properties": {
+        //                                                "title": "Mapbox SF",
+        //                                                "description": "155 9th St, San Francisco",
+        //                                                "marker-color": "#fc4353",
+        //                                                "marker-size": "large",
+        //                                                "marker-symbol": "harbor"
+        //                                            }
+        //                                        }
+        //                                    ];
+
+        //        var data = $.ajax({
+        //            url: _readUrl,
+        //            type: 'GET',
+        //            dataType: 'json',
+        //            contentType: 'application/json; charset=utf-8',
+        //            beforeSend: function () {
+        //                console.log("beforeSend");
+        //            },
+        //            success: function (result) {
+        //                //console.log(result);
+        //                // On success add fetched data to the map.
+        //                return result;
+        //            },
+        //            error: function (objAjaxRequest, strError) {
+        //                var respText = objAjaxRequest.responseText;
+        //                var messageText = respText;
+        //                console.log(messageText);
+        //            }
+
+        //        });
+
+        var map = L.mapbox.map('map', 'examples.map-9ijuk24y').setView([37.8, -96], 4);
+
+        var data;
+
+        $.ajax({
+            url: _readUrl,
+            type: 'GET',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            beforeSend: function () {
+                console.log("beforeSend");
+            },
+            success: function (result) {
+                //console.log(result);
+                // On success add fetched data to the map.
+                data = result;
+                L.mapbox.featureLayer(result).addTo(map);
+                //L.mapbox.featureLayer.setGeoJSON(result).addTo(map);
+            },
+            error: function (objAjaxRequest, strError) {
+                var respText = objAjaxRequest.responseText;
+                var messageText = respText;
+                console.log(messageText);
+            }
+
+        });
+
+        //        var data = [{ "type": "Feature", "geometry": { "type": "Point", "coordinates": [-77.0323890139098, 38.9131880597456] }, "properties": { "title": "Mapbox DC", "description": "1714 14th St NW, Washington DC", "url": "https://en.wikipedia.org/wiki/Washington,_D.C."} }, { "type": "Feature", "geometry": { "type": "Point", "coordinates": [-122.414, 37.776] }, "properties": { "title": "Mapbox SF", "description": "155 9th St, San Francisco", "url": "https://en.wikipedia.org/wiki/Washington,_D.C."}}];
+
+
+        if (data != null) {
+            console.log("if");
+            console.log(data);
+            console.log(data.responseText);
+            console.log("if");
+        } else {
+            console.log("else");
+            console.log(data);
+            console.log("else");
+        }
+
+        //L.mapbox.map('map', 'examples.map-9ijuk24y').setView([37.8, -96], 4).featureLayer.setGeoJSON(data);
+
+        //        var map = L.mapbox.map('map', 'examples.map-h67hf2ic')
+        //          .setView([0.3941, -78.2227], 7);
+
+        //        function LoadMapbox(getUrl) {
+
+        //            $.ajax({
+        //                url: getUrl,
+        //                type: 'GET',
+        //                dataType: 'json',
+        //                contentType: 'application/json; charset=utf-8',
+        //                beforeSend: function () {
+        //                    console.log("beforeSend");
+        //                },
+        //                success: function (result) {
+        //                    // On success add fetched data to the map.
+        //                    L.mapbox.featureLayer(result).addTo(map);
+        //                    console.log(result);
+        //                },
+        //                error: function (objAjaxRequest, strError) {
+        //                    var respText = objAjaxRequest.responseText;
+        //                    var messageText = respText;
+        //                    console.log(messageText);
+        //                }
+
+        //            });
+        //        }
+
+        //        $(LoadMapbox(_readUrl));
+
+    });
+
+</script>

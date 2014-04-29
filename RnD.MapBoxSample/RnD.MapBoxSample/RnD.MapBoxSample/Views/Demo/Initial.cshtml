@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Initial";
+}
+<div id="page">
+    <div style="display: inline-block;">
+        <h2>
+            A Simple Map</h2>
+        <hr />
+        <div id='map'>
+        </div>
+    </div>
+    <div style="display: inline-block;">
+        <h2>
+            A Simple Map Load by Json</h2>
+        <hr />
+        <div id='map2'>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    #map
+    {
+        display: inline-block;
+        height: 400px !important;
+        width: 800px !important;
+    }
+    #map2
+    {
+        display: inline-block;
+        height: 400px !important;
+        width: 800px !important;
+    }
+</style>
+<script type="text/javascript">
+    var map = L.mapbox.map('map', 'examples.map-9ijuk24y')
+    .setView([40, -74.50], 9);
+</script>
