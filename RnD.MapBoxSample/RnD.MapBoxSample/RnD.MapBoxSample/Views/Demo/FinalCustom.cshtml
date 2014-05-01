@@ -9,6 +9,10 @@
         <div id='map'>
         </div>
     </div>
+    <div class="mapbox-box-description">
+        <p>
+            <strong>Dhaka</strong>, <span>Bangladesh</span></p>
+    </div>
 </div>
 <style type="text/css">
     #map
@@ -30,6 +34,12 @@
     }
     .mapbox-box-description
     {
+    }
+    
+    .mapbox-box-description p strong span
+    {
+        padding: 0px !important;
+        margin: 0px !important;
     }
 </style>
 <script type="text/javascript">
@@ -78,13 +88,13 @@
 
         });
 
-        map.setView([37.8, -96], 4);
+        map.setView([23.604528, 90.678406], 6);
 
     }
 
     $(document).ready(function () {
 
-        var _readUrl = '@Url.Action("LoadGeoJSONData", "Demo")';
+        var _readUrl = '@Url.Action("FinalData", "Demo")';
 
         LoadMapbox(_readUrl);
 

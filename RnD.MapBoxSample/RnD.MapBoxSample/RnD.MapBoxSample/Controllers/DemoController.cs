@@ -53,7 +53,7 @@ namespace RnD.MapBoxSample.Controllers
                     {
                         Id = 1,
                         ImagePath = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Cherry_Blossoms_and_Washington_Monument.jpg/320px-Cherry_Blossoms_and_Washington_Monument.jpg",
-                        UrlLink = "https://en.wikipedia.org/wiki/Washington,_D.C.",
+                        UrlLink = "http://raselahmmed.com",
                         MarkerSymbol = "star",
                         CityName = "Washington, D.C."
                     },
@@ -132,14 +132,14 @@ namespace RnD.MapBoxSample.Controllers
                     {
                         title = "Mapbox DC",
                         description = "1714 14th St NW, Washington DC",
-                        url = "https://en.wikipedia.org/wiki/Washington,_D.C."
+                        url = "http://raselahmmed.com"
                     };
 
                 var geoPropertyViewModel2 = new GeoPropertyViewModel()
                     {
                         title = "Mapbox SF",
                         description = "155 9th St, San Francisco",
-                        url = "https://en.wikipedia.org/wiki/Washington,_D.C."
+                        url = "http://raselahmmed.com"
                     };
 
                 var geoDataViewModelList = new List<GeoDataViewModel>
@@ -157,6 +157,193 @@ namespace RnD.MapBoxSample.Controllers
                         geometry = geoGeometryViewModel2,
                         properties = geoPropertyViewModel2
                     },
+                    
+                };
+
+                return Json(geoDataViewModelList, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message.ToString(), JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult FinalData()
+        {
+            try
+            {
+
+                #region Dhaka
+
+                //GPSLongitude, GPSLatitude
+                var DhakaGeometry = new GeoGeometryViewModel()
+                {
+                    type = "Point",
+                    coordinates = new decimal[] { Convert.ToDecimal(90.40722222), Convert.ToDecimal(23.71027778) }
+                };
+
+                var DhakaProperty = new GeoPropertyViewModel()
+                {
+                    title = "Dhaka",
+                    description = "<p><strong>Dhaka</strong>, <span>Bangladesh</span></p>",
+                    url = "http://raselahmmed.com"
+                };
+
+                #endregion
+
+                #region Chittagong
+
+                var ChittagongGeometry = new GeoGeometryViewModel()
+                {
+                    type = "Point",
+                    coordinates = new decimal[] { Convert.ToDecimal(91.83638889), Convert.ToDecimal(22.33305556) }
+                };
+
+                var ChittagongProperty = new GeoPropertyViewModel()
+                {
+                    title = "Chittagong",
+                    description = "Chittagong, Bangladesh",
+                    url = "http://raselahmmed.com"
+                };
+
+                #endregion
+
+                #region Sylhet
+
+                var SylhetGeometry = new GeoGeometryViewModel()
+                {
+                    type = "Point",
+                    coordinates = new decimal[] { Convert.ToDecimal(91.87166667), Convert.ToDecimal(24.89666667) }
+                };
+
+                var SylhetProperty = new GeoPropertyViewModel()
+                {
+                    title = "Sylhet",
+                    description = "Sylhet, Bangladesh",
+                    url = "http://raselahmmed.com"
+                };
+
+                #endregion
+
+                #region Rajshahi
+
+                var RajshahiGeometry = new GeoGeometryViewModel()
+                {
+                    type = "Point",
+                    coordinates = new decimal[] { Convert.ToDecimal(88.6), Convert.ToDecimal(24.36666667) }
+                };
+
+                var RajshahiProperty = new GeoPropertyViewModel()
+                {
+                    title = "Rajshahi",
+                    description = "Rajshahi, Bangladesh",
+                    url = "http://raselahmmed.com"
+                };
+
+                #endregion
+
+                #region Khulna
+
+                var KhulnaGeometry = new GeoGeometryViewModel()
+                {
+                    type = "Point",
+                    coordinates = new decimal[] { Convert.ToDecimal(89.56722222), Convert.ToDecimal(22.81333333) }
+                };
+
+                var KhulnaProperty = new GeoPropertyViewModel()
+                {
+                    title = "Khulna",
+                    description = "Khulna, Bangladesh",
+                    url = "http://raselahmmed.com"
+                };
+
+                #endregion
+
+                #region Barisal
+
+                var BarisalGeometry = new GeoGeometryViewModel()
+                {
+                    type = "Point",
+                    coordinates = new decimal[] { Convert.ToDecimal(90.37111111), Convert.ToDecimal(22.70194444) }
+                };
+
+                var BarisalProperty = new GeoPropertyViewModel()
+                {
+                    title = "Barisal",
+                    description = "Barisal, Bangladesh",
+                    url = "http://raselahmmed.com"
+                };
+
+                #endregion
+
+                #region Rangpur
+
+                var RangpurGeometry = new GeoGeometryViewModel()
+                {
+                    type = "Point",
+                    coordinates = new decimal[] { Convert.ToDecimal(89.25), Convert.ToDecimal(25.75) }
+                };
+
+                var RangpurProperty = new GeoPropertyViewModel()
+                {
+                    title = "Rangpur",
+                    description = "Rangpur, Bangladesh",
+                    url = "http://raselahmmed.com"
+                };
+
+                #endregion
+
+                var geoDataViewModelList = new List<GeoDataViewModel>
+                {
+                    new GeoDataViewModel()
+                    {
+                        type = "Feature", 
+                        geometry = DhakaGeometry,
+                        properties = DhakaProperty
+                    },
+
+                    new GeoDataViewModel()
+                    {
+                        type = "Feature", 
+                        geometry = ChittagongGeometry,
+                        properties = ChittagongProperty
+                    },
+
+                    new GeoDataViewModel()
+                    {
+                        type = "Feature", 
+                        geometry = SylhetGeometry,
+                        properties = SylhetProperty
+                    },
+
+                    new GeoDataViewModel()
+                    {
+                        type = "Feature", 
+                        geometry = RajshahiGeometry,
+                        properties = RajshahiProperty
+                    },
+
+                    new GeoDataViewModel()
+                    {
+                        type = "Feature", 
+                        geometry = KhulnaGeometry,
+                        properties = KhulnaProperty
+                    },
+
+                    new GeoDataViewModel()
+                    {
+                        type = "Feature", 
+                        geometry = BarisalGeometry,
+                        properties = BarisalProperty
+                    },
+
+                    new GeoDataViewModel()
+                    {
+                        type = "Feature", 
+                        geometry = RangpurGeometry,
+                        properties = RangpurProperty
+                    }
                     
                 };
 
